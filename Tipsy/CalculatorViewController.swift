@@ -29,7 +29,16 @@ class CalculatorViewController: UIViewController {
         stepper.minimumValue = 1
         billTextField.keyboardType = .decimalPad
         
+        // Add tap gesture recognizer to view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(tapGesture)
+        
     }
+    
+    @objc func viewTapped() {
+        view.endEditing(true)
+    }
+    
     func percentStringToFloat(_ percentString: String) -> Float? {
         if let number = Float(percentString.trimmingCharacters(in: CharacterSet(charactersIn: "%"))) {
             return number / 100
@@ -57,7 +66,6 @@ class CalculatorViewController: UIViewController {
         guard let billTotal = Float(billTextField.text ?? "") else { return }
         tipBrain = TipBrain(billTotal: billTotal, splits: currentSplit, tipPct: currentTip)
         if let totalPerPerson = tipBrain?.calculatePerPerson() {
-            print(totalPerPerson)
             self.performSegue(withIdentifier: "goToResult", sender: self)
         }
     }
@@ -78,3 +86,5 @@ class CalculatorViewController: UIViewController {
         twentyPctButton.isSelected = false
         }
     }
+
+    

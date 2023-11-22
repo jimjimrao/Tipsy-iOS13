@@ -20,7 +20,6 @@ class ResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let pct = String(Int(tipPercentage! * 100))
-        print(pct)
         totalLabel.text = String(format: "%.2f", totalPerPersonValue!)
         settingsLabel.text = String("Split between \(numberOfPeople!) people, with \(pct)% tip.")
 
