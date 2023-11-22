@@ -14,6 +14,7 @@
 		ADB6895C2326708E006D4E2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB6895B2326708E006D4E2B /* Assets.xcassets */; };
 		ADB6895F2326708E006D4E2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB6895D2326708E006D4E2B /* LaunchScreen.storyboard */; };
 		ED3A8F6B2B0D8F7D00FBAA66 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A8F6A2B0D8F7D00FBAA66 /* ResultsViewController.swift */; };
+		ED3A8F6E2B0D965800FBAA66 /* TipBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A8F6D2B0D965800FBAA66 /* TipBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		ADB6895E2326708E006D4E2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADB689602326708E006D4E2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED3A8F6A2B0D8F7D00FBAA66 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		ED3A8F6D2B0D965800FBAA66 /* TipBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		ADB689512326708D006D4E2B /* Tipsy */ = {
 			isa = PBXGroup;
 			children = (
+				ED3A8F6D2B0D965800FBAA66 /* TipBrain.swift */,
 				ADB689522326708D006D4E2B /* AppDelegate.swift */,
 				ADB689542326708D006D4E2B /* SceneDelegate.swift */,
 				ADB689562326708D006D4E2B /* CalculatorViewController.swift */,
@@ -153,6 +156,7 @@
 				ADB689532326708D006D4E2B /* AppDelegate.swift in Sources */,
 				ADB689552326708D006D4E2B /* SceneDelegate.swift in Sources */,
 				ED3A8F6B2B0D8F7D00FBAA66 /* ResultsViewController.swift in Sources */,
+				ED3A8F6E2B0D965800FBAA66 /* TipBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

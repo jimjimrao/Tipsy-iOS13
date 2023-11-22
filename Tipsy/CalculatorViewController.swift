@@ -17,12 +17,17 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     
+    var currentTip: Float = 0.15
+    var currentSplit = 2
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         stepper.value = 2
         stepper.minimumValue = 1
+        billTextField.keyboardType = .decimalPad
+        
     }
     func percentStringToFloat(_ percentString: String) -> Float? {
         if let number = Float(percentString.trimmingCharacters(in: CharacterSet(charactersIn: "%"))) {
@@ -35,18 +40,25 @@ class CalculatorViewController: UIViewController {
         tenPctButton.isSelected = false
         twentyPctButton.isSelected = false
         sender.isSelected = true
+        billTextField.endEditing(true)
         if let tipTitle = sender.currentTitle, let tipValue = percentStringToFloat(tipTitle) {
-                    print("Selected tip: \(tipValue)")
+            currentTip = tipValue
                 }
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         splitNumberLabel.text = String(Int(sender.value))
+        currentSplit = Int(sender.value)
         
         
     }
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(splitNumberLabel.text!)
+        let tip = self.currentTip
+        let billTotal = Float(billTextField.text!) ?? 0.0
+        let split = self.currentSplit
+        let tipBrain = TipBrain(billTotal: billTotal, splits: split, tipPct: tip)
+        let totalPerPerson = tipBrain.calculatePerPerson()
+        print(totalPerPerson)
     }
 }
 
