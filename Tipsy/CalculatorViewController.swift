@@ -15,11 +15,14 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var tenPctButton: UIButton!
     @IBOutlet weak var twentyPctButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
+    @IBOutlet weak var stepper: UIStepper!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        stepper.value = 2
+        stepper.minimumValue = 1
     }
     func percentStringToFloat(_ percentString: String) -> Float? {
         if let number = Float(percentString.trimmingCharacters(in: CharacterSet(charactersIn: "%"))) {
@@ -38,8 +41,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        splitNumberLabel.text = String(Int(sender.value))
+        
+        
     }
     @IBAction func calculatePressed(_ sender: UIButton) {
+        print(splitNumberLabel.text!)
     }
 }
 
