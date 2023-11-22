@@ -13,10 +13,24 @@ struct TipBrain {
     var splits: Int
     var tipPct: Float
     
+    var total: Float {
+        return billTotal * (1.0 + tipPct)
+    }
     
     func calculatePerPerson() -> Float {
-        let totalWithTip = self.billTotal * (1.0 + self.tipPct)
-        return totalWithTip / Float(self.splits)
-        
+        return total / Float(splits)
+    }
+    
+    func getTotal() -> Float {
+        return calculatePerPerson()
+    }
+    
+    func getSplit() -> Int {
+        return splits
+    }
+    
+    func getTip() -> Float {
+        return tipPct
     }
 }
+
