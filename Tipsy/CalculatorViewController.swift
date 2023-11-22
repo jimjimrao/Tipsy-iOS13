@@ -19,7 +19,7 @@ class CalculatorViewController: UIViewController {
     
     var currentTip: Float = 0.15
     var currentSplit = 2
-    var tipBrain: TipBrain? 
+    var tipBrain: TipBrain?
     
     
     override func viewDidLoad() {
@@ -36,16 +36,15 @@ class CalculatorViewController: UIViewController {
         }
         return nil
     }
+    
     @IBAction func tipChanged(_ sender: UIButton) {
-        zeroPctButton.isSelected = false
-        tenPctButton.isSelected = false
-        twentyPctButton.isSelected = false
-        sender.isSelected = true
-        billTextField.endEditing(true)
-        if let tipTitle = sender.currentTitle, let tipValue = percentStringToFloat(tipTitle) {
-            currentTip = tipValue
-                }
-    }
+            deselectAllButtons()
+            sender.isSelected = true
+            billTextField.endEditing(true)
+            if let tipTitle = sender.currentTitle, let tipValue = percentStringToFloat(tipTitle) {
+                currentTip = tipValue
+            }
+        }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         splitNumberLabel.text = String(Int(sender.value))
@@ -53,22 +52,29 @@ class CalculatorViewController: UIViewController {
         
         
     }
+        
     @IBAction func calculatePressed(_ sender: UIButton) {
-            let tip = self.currentTip
-            let billTotal = Float(billTextField.text!) ?? 0.0
-            let split = self.currentSplit
-            tipBrain = TipBrain(billTotal: billTotal, splits: split, tipPct: tip) // Assign to the instance variable
-            let totalPerPerson = tipBrain?.calculatePerPerson()
-            print(totalPerPerson ?? 0.0)
+        guard let billTotal = Float(billTextField.text ?? "") else { return }
+        tipBrain = TipBrain(billTotal: billTotal, splits: currentSplit, tipPct: currentTip)
+        if let totalPerPerson = tipBrain?.calculatePerPerson() {
+            print(totalPerPerson)
             self.performSegue(withIdentifier: "goToResult", sender: self)
         }
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "goToResult" {
-                let destinationVC = segue.destination as! ResultsViewController
-                destinationVC.totalPerPersonValue = tipBrain?.getTotal() ?? 0.0
-                destinationVC.numberOfPeople = tipBrain?.getSplit() ?? 0
-                destinationVC.tipPercentage = tipBrain?.getTip() ?? 0.0
-            }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult",
+           let destinationVC = segue.destination as? ResultsViewController,
+           let tipBrain = tipBrain {
+            destinationVC.totalPerPersonValue = tipBrain.getTotal()
+            destinationVC.numberOfPeople = tipBrain.getSplit()
+            destinationVC.tipPercentage = tipBrain.getTip()
+        }
+    }
+    
+    private func deselectAllButtons() {
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
         }
     }
